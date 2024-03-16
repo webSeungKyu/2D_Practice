@@ -150,8 +150,14 @@ public class PlayerController : MonoBehaviour
 
     public void GameStop()
     {
-        
+        //못 움직이게 만들기
         rbody.velocity = new Vector2(0, 0);
-        transform.position = GameObject.FindGameObjectWithTag("Goal").GetComponent<Transform>().position;
+
+        //만약 클리어 했을 때 Gaol로 이동
+        if(PlayerController.gameState == "gameClear")
+        {
+            transform.position = GameObject.FindGameObjectWithTag("Goal").GetComponent<Transform>().position;
+        }
+
     }
 }
