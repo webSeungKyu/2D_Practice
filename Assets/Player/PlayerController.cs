@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class PlayerController : MonoBehaviour
     string nowAnime = "";
     string oldAnime = "";
     public static string gameState;
+
+    //게임 점수 : white 100점, red 50점 blue 30점 green 10점
+    public int score;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -127,6 +131,11 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.tag == "Dead")
         {
             GameOver();
+        }else if(collision.gameObject.tag == "ScoreItem")
+        {
+            ItemData itemData = collision.gameObject.GetComponent<ItemData>();
+            score += itemData.value;
+            Destroy(collision.gameObject);
         }
     }
 

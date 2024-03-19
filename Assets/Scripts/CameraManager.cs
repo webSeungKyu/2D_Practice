@@ -16,6 +16,7 @@ public class CameraManager : MonoBehaviour
     public float forceScrollSpeedX = 0.0f;
     public bool isForceScrollY = false;
     public float forceScrollSpeedY = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
