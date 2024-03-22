@@ -8,6 +8,7 @@ TagManager:
   - Dead
   - ScoreItem
   - Destroy
+  - Switch
   layers:
   - Default
   - TransparentFX
