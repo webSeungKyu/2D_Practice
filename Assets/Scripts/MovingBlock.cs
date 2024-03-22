@@ -110,7 +110,6 @@ public class MovingBlock : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            Debug.Log("플레이어와 접촉 시작");
             //플레이어와 접촉하면 이동 블록의 자식으로 만들기
             collision.transform.SetParent(transform);
             if(playerOnOff)
@@ -121,10 +120,8 @@ public class MovingBlock : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log("플레이어와 접촉 종료해라!");
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("플레이어와 접촉 종료");
             //플레이어와 접촉이 끝나면 이동 블록의 자식에서 제외시키기
             collision.transform.SetParent(null);
         }
