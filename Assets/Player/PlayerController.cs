@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
 
     //게임 점수 : white 100점, red 50점 blue 30점 green 10점
     public int score;
+
+    bool isMoving = false;//터치스크린용
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -43,14 +45,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //수평 방향으로의 입력 확인 > 오른쪽 키 눌리면 1.0f 반환 > 왼쪽은 - 1.0f > 아무것도 안 눌리면 0.0f
-        axisH = Input.GetAxisRaw("Horizontal");
+        //터치스크린용 추가 > 버추얼 패드로 이동을 안 하고 있을 때만.. 키보드로 이동 가능
+        if (isMoving == false)
+        {
+            //수평 방향으로의 입력 확인 > 오른쪽 키 눌리면 1.0f 반환 > 왼쪽은 - 1.0f > 아무것도 안 눌리면 0.0f
+            axisH = Input.GetAxisRaw("Horizontal");
+        }
 
-        if(axisH > 0.0f)
+        if (axisH > 0.0f)
         {
             transform.localScale = new Vector2(1, 1);
         }
-        else if(axisH < 0.0f)
+        else if (axisH < 0.0f)
         {
             transform.localScale = new Vector2(-1, 1);
         }
@@ -59,15 +65,17 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-        if(gameState != "playing")
+        if (gameState != "playing")
         {
             return;
         }
+
+
     }
 
     void FixedUpdate()
     {
-        if(gameState != "playing")
+        if (gameState != "playing")
         {
             return;
         }
@@ -77,13 +85,13 @@ public class PlayerController : MonoBehaviour
         //transform.up은 백터로 x = 0, y = 1, z = 0으로 나타냄
         onGround = Physics2D.Linecast(transform.position, transform.position - (transform.up * 0.1f), groundLayer);
 
-        if(onGround || axisH != 0)
+        if (onGround || axisH != 0)
         {
             //지면 위 or 속도가 0이 아닐 경우
             rbody.velocity = new Vector2(axisH * speed, rbody.velocity.y);
         }
 
-        if(onGround && goJump)
+        if (onGround && goJump)
         {
             //지면 위 and 점프 키 눌렸을 경우
             Vector2 jumpPw = new Vector2(0, jump); // 점프를 위한 백터 생성
@@ -94,7 +102,7 @@ public class PlayerController : MonoBehaviour
         if (onGround)
         {
             //지면 위일 경우
-            if(axisH == 0)
+            if (axisH == 0)
             {
                 nowAnime = stopAnime;
             }
@@ -109,7 +117,7 @@ public class PlayerController : MonoBehaviour
             nowAnime = jumpAnime;
         }
 
-        if(nowAnime != oldAnime)
+        if (nowAnime != oldAnime)
         {
             oldAnime = nowAnime;
             animator.Play(nowAnime);
@@ -124,14 +132,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Goal")
+        if (collision.gameObject.tag == "Goal")
         {
             Goal();
         }
         else if (collision.gameObject.tag == "Dead")
         {
             GameOver();
-        }else if(collision.gameObject.tag == "ScoreItem")
+        }
+        else if (collision.gameObject.tag == "ScoreItem")
         {
             ItemData itemData = collision.gameObject.GetComponent<ItemData>();
             score += itemData.value;
@@ -145,7 +154,7 @@ public class PlayerController : MonoBehaviour
         gameState = "gameClear";
         GameStop();
     }
-    
+
     public void GameOver()
     {
         animator.Play(deadAnime);
@@ -163,10 +172,23 @@ public class PlayerController : MonoBehaviour
         rbody.velocity = new Vector2(0, 0);
 
         //만약 클리어 했을 때 Gaol로 이동
-        if(PlayerController.gameState == "gameClear")
+        if (PlayerController.gameState == "gameClear")
         {
             transform.position = GameObject.FindGameObjectWithTag("Goal").GetComponent<Transform>().position;
         }
 
+    }
+
+    public void SetAxis(float h, float v)
+    {
+        axisH = h;
+        if (axisH == 0)
+        {
+            isMoving = false;
+        }
+        else
+        {
+            isMoving = true;
+        }
     }
 }

@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     public AudioClip audioClipGameOver;
     public AudioClip audioClipGameClear;
+
+    public GameObject inputUI; // 터치스크린용 조작 UI 패널
     // Start is called before the first frame update
     void Start()
     {
@@ -76,7 +78,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("soundPlayer null");
             }
-
+            inputUI.SetActive(false); // 조작 UI 숨기기
         }
         else if (PlayerController.gameState == "gameOver")
         {
@@ -102,7 +104,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("soundPlayer null");
             }
-
+            inputUI.SetActive(false); // 조작 UI 숨기기
         }
         else if (PlayerController.gameState == "playing")
         {
@@ -138,5 +140,12 @@ public class GameManager : MonoBehaviour
     {
         int score = stageScore + totalScore;
         scoreText.text = score.ToString();
+    }
+
+    public void Jump()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        PlayerController playerController = player.GetComponent< PlayerController>();
+        playerController.Jump();
     }
 }
