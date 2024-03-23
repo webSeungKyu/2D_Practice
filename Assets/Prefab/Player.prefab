@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aad944695856b748808a3b1a6295686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 4.2
   jump: 9
   groundLayer:
     serializedVersion: 2
@@ -172,6 +172,7 @@ MonoBehaviour:
   jumpAnime: PlayerJump
   goalAnime: PlayerGoal
   deadAnime: PlayerOver
+  score: 0
 --- !u!95 &5964833642132703562
 Animator:
   serializedVersion: 5

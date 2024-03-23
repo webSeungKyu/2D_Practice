@@ -1778,6 +1778,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1213788766773457052, guid: 9add40cbd93a6d24b9b74ea40b8c2874, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 475f4837af487ce4a9e68bb227455e4c, type: 3}
     - target: {fileID: 3633169504695331682, guid: 9add40cbd93a6d24b9b74ea40b8c2874, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1790,6 +1794,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4459004854009110825, guid: 9add40cbd93a6d24b9b74ea40b8c2874, type: 3}
+      propertyPath: audioClipGameOver
+      value: 
+      objectReference: {fileID: 8300000, guid: 47f45ef7b5767674393cc401fc325705, type: 3}
+    - target: {fileID: 4459004854009110825, guid: 9add40cbd93a6d24b9b74ea40b8c2874, type: 3}
+      propertyPath: audioClipGameClear
+      value: 
+      objectReference: {fileID: 8300000, guid: 90eae78e8ce85a849b5b0ca11b2de641, type: 3}
     - target: {fileID: 6367432596169897055, guid: 9add40cbd93a6d24b9b74ea40b8c2874, type: 3}
       propertyPath: Loop
       value: 1
