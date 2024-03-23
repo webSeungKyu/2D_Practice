@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public static int totalScore;
     public int stageScore = 0;
 
+    public AudioClip audioClipGameOver;
+    public AudioClip audioClipGameClear;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +65,18 @@ public class GameManager : MonoBehaviour
             stageScore = 0;
             UpdateScore();
 
+            AudioSource soundPlayer = GetComponent<AudioSource>();
+            if (soundPlayer != null)
+            {
+                Debug.Log("사운드 멈춘 후 재생");
+                soundPlayer.Stop();
+                soundPlayer.PlayOneShot(audioClipGameClear);
+            }
+            else
+            {
+                Debug.Log("soundPlayer null");
+            }
+
         }
         else if (PlayerController.gameState == "gameOver")
         {
@@ -77,6 +91,18 @@ public class GameManager : MonoBehaviour
             {
                 timeCnt.isTimeOver = true;
             }
+
+            AudioSource soundPlayer = GetComponent<AudioSource>();
+            if(soundPlayer != null)
+            {
+                soundPlayer.Stop();
+                soundPlayer.PlayOneShot(audioClipGameOver); //Play()와는 다르게 소리를 중첩해서 재생할 수 있다.
+            }
+            else
+            {
+                Debug.Log("soundPlayer null");
+            }
+
         }
         else if (PlayerController.gameState == "playing")
         {
