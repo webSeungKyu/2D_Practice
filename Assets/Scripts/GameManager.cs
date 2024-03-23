@@ -70,7 +70,6 @@ public class GameManager : MonoBehaviour
             AudioSource soundPlayer = GetComponent<AudioSource>();
             if (soundPlayer != null)
             {
-                Debug.Log("»ç¿îµå ¸ØÃá ÈÄ Àç»ý");
                 soundPlayer.Stop();
                 soundPlayer.PlayOneShot(audioClipGameClear);
             }
