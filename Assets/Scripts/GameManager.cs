@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +32,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Invoke("InactiveImage", 1.0f);
+        
+        if (totalScore < 5000)
+        {
+            //게임 설명
+            Invoke("Destroy_IntroductionPanel", 9.7f);
+        }
         panel.SetActive(false);
 
         timeCnt = GetComponent<TimeController>();
@@ -133,6 +140,10 @@ public class GameManager : MonoBehaviour
     void InactiveImage()
     {
         mainImage.SetActive(false);
+    }
+    void Destroy_IntroductionPanel()
+    {
+        Destroy(GameObject.FindGameObjectWithTag("Destroy"));
     }
 
     void UpdateScore()
